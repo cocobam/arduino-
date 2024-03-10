@@ -1,0 +1,164 @@
+[
+    {
+        "id": "e712bee6f557e80b",
+        "type": "tab",
+        "label": "流程1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "27726c9dc0f7ccf3",
+        "type": "mysql",
+        "z": "e712bee6f557e80b",
+        "mydb": "964bd85ef007d452",
+        "name": "",
+        "x": 780,
+        "y": 380,
+        "wires": [
+            [
+                "02ed55c80a0e8a2d"
+            ]
+        ]
+    },
+    {
+        "id": "65f5784b6f174c78",
+        "type": "function",
+        "z": "e712bee6f557e80b",
+        "name": "Sound",
+        "func": "msg.topic = \"SELECT Sound FROM `dht`\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 320,
+        "wires": [
+            [
+                "27726c9dc0f7ccf3"
+            ]
+        ]
+    },
+    {
+        "id": "a509ce4fe4278b17",
+        "type": "inject",
+        "z": "e712bee6f557e80b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 780,
+        "y": 220,
+        "wires": [
+            [
+                "65f5784b6f174c78"
+            ]
+        ]
+    },
+    {
+        "id": "9e24a3d363166357",
+        "type": "ui_chart",
+        "z": "e712bee6f557e80b",
+        "name": "",
+        "group": "7b69d77607cd38a8",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 830,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "02ed55c80a0e8a2d",
+        "type": "function",
+        "z": "e712bee6f557e80b",
+        "name": "function 2",
+        "func": "var test = msg.payload;\ntest.forEach(function(e,i){        \nmsg.payload=e['Sound'];\n});\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 540,
+        "wires": [
+            [
+                "9e24a3d363166357"
+            ]
+        ]
+    },
+    {
+        "id": "964bd85ef007d452",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "172.20.10.2",
+        "port": "3306",
+        "db": "kokonum",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "7b69d77607cd38a8",
+        "type": "ui_group",
+        "name": "linkit",
+        "tab": "acc097116b716d2d",
+        "order": 1,
+        "disp": true,
+        "width": "20",
+        "collapse": false
+    },
+    {
+        "id": "acc097116b716d2d",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
